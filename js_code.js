@@ -19,9 +19,7 @@
 
    var postTitle = new Array();     // array of posttitles
    var postUrl = new Array();       // array of posturls
-   var postDate = new Array();      // array of post publish dates
    var postSum = new Array();       // array of post summaries
-   var postLabels = new Array();    // array of post labels
 
 // global variables
    var sortBy = "datenewest";         // default value for sorting ToC
@@ -261,12 +259,5 @@ function showToc() {
      var toclink = document.getElementById("toclink");
    
   }
-  else { alert("Just wait... TOC is loading"); }
-}
-
-function hideToc() {
-  var tocdiv = document.getElementById("toc");
-  tocdiv.innerHTML = '';
-  var toclink = document.getElementById("toclink");
-  toclink.innerHTML = '<a href="#" onclick="scroll(0,0); showToc(); Effect.toggle('+"'toc-result','blind');"+'">» Show Table of Contents</a> <img src="http://chenkaie.blog.googlepages.com/new_1.gif"/>';
+  else { alert("Ожидайте, идет загрузка списка"); }
 }
