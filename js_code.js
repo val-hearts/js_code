@@ -56,9 +56,6 @@ function loadtoc(json) {
          // get the posttitle from the entry
             var posttitle = entry.title.$t;
 
-         // get the post date from the entry
-            var postdate = entry.published.$t.substring(0,10);
-
          // get the post url from the entry
             var posturl;
             for (var k = 0; k < entry.link.length; k++) {
@@ -86,22 +83,13 @@ function loadtoc(json) {
                postcontent = postcontent.substring(0,quoteEnd) + '...';
             }
 
-         // get the post labels from the entry
-            var pll = '';
-            if ("category" in entry) {
-               for (var k = 0; k < entry.category.length; k++) {
-                  pll += '<a href="javascript:filterPosts(\'' + entry.category[k].term + '\');" title="Click here to select all posts with label \'' + entry.category[k].term + '\'">' + entry.category[k].term + '</a>,  ';
-               }
-            var l = pll.lastIndexOf(',');
-            if (l != -1) { pll = pll.substring(0,l); }
-            }
-
+         
          // add the post data to the arrays
             postTitle.push(posttitle);
-            postDate.push(postdate);
+            
             postUrl.push(posturl);
             postSum.push(postcontent);
-            postLabels.push(pll);
+           
          }
       }
       if(totalEntires==totalPosts) {tocLoaded=true;showToc();}
@@ -149,18 +137,14 @@ function sortPosts(sortBy) {
       var temp = postTitle[x];
       postTitle[x] = postTitle[y];
       postTitle[y] = temp;
-      var temp = postDate[x];
-      postDate[x] = postDate[y];
-      postDate[y] = temp;
+      
       var temp = postUrl[x];
       postUrl[x] = postUrl[y];
       postUrl[y] = temp;
       var temp = postSum[x];
       postSum[x] = postSum[y];
       postSum[y] = temp;
-      var temp = postLabels[x];
-      postLabels[x] = postLabels[y];
-      postLabels[y] = temp;
+      
    } // end swapPosts
 
    for (var i=0; i < postTitle.length-1; i++) {
@@ -201,24 +185,7 @@ function displayToc(filter) {
    if (postFilter != '') {
       tocTool3 = 'Click to show all posts';
    }
-   tocTable += '<table>';
-   tocTable += '<tr>';
-   tocTable += '<td class="toc-header-col1">';
-   tocTable += '<a href="javascript:toggleTitleSort();" title="' + tocTool1 + '">' + tocHead1 + '</a>';
-   tocTable += '</tr>';
-   for (var i = 0; i < postTitle.length; i++) {
-      if (filter == '') {
-         tocTable += '<tr><td class="toc-entry-col1"><a href="' + postUrl[i] + '" title="' + postSum[i] + '">' + postTitle[i] + '</a></td><td class="toc-entry-col2">' + postDate[i] + '</td><td class="toc-entry-col3">' + postLabels[i] + '</td></tr>';
-         numDisplayed++;
-      } else {
-          z = postLabels[i].lastIndexOf(filter);
-          if ( z!= -1) {
-             tocTable += '<tr><td class="toc-entry-col1"><a href="' + postUrl[i] + '" title="' + postSum[i] + '">' + postTitle[i] + '</a></td><td class="toc-entry-col2">' + postDate[i] + '</td><td class="toc-entry-col3">' + postLabels[i] + '</td></tr>';
-             numDisplayed++;
-          }
-        }
-   }
-   tocTable += '</table>';
+   
    if (numDisplayed == postTitle.length) {
       var tocNote = '<span class="toc-note">Displaying all ' + postTitle.length + ' posts<br/></span>'; }
    else {
