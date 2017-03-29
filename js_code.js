@@ -181,10 +181,7 @@ function displayToc(filter) {
    var tocTable = '';
    var tocHead1 = 'POST TITLE';
    var tocTool1 = 'Click to sort by title';
-   var tocHead2 = 'POST DATE';
-   var tocTool2 = 'Click to sort by date';
-   var tocHead3 = 'LABELS';
-   var tocTool3 = '';
+  
    if (sortBy == "titleasc") { 
       tocTool1 += ' (descending)';
       tocTool2 += ' (newest first)';
